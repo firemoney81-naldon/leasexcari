@@ -1,23 +1,733 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "GMC 시에라는 왜 장기렌트카 이용이 불가능하고 오직 자동차리스로만 계약해야 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "대한민국 여객자동차 운수사업법상 화물차로 분류되는 픽업트럭은 장기렌트카의 하, 허, 호 번호판 등록 대상에서 제외됩니다. GMC 시에라 드날리는 배기량 및 적재함 기준으로 화물차에 해당하기 때문에 대여사업용 등록이 불법입니다. 따라서 법인이나 개인사업자가 비용처리를 하며 운용하려면 렌트가 아닌 자동차리스 상품을 이용해야만 합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "GMC 시에라 드날리 6.2L 가솔린 모델의 연간 세금과 평균적인 유지비는 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GMC 시에라는 화물차로 등록되므로 연간 자동차세는 단돈 28,500원에 불과합니다. 그러나 6.2L V8 가솔린 엔진의 공인연비가 복합 6.9km/l 수준으로 낮기 때문에, 연간 15,000km 주행 기준 유류비가 약 380만 원에서 420만 원 이상 발생합니다. 또한 첫 화물차 보험 가입 시에는 승용차 경력이 승계되지 않아 초기 보험료가 다소 높게 책정될 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026년 기준 GMC 시에라 자동차리스 계약 시 사업자 부가세 환급이나 비용처리 한도는 어떻게 되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GMC 시에라는 화물차 세제 혜택을 전액 적용받는 차량입니다. 일반 업무용 승용차에 적용되는 연간 1,500만 원 한도의 감가상각비 및 유지비용 제한을 받지 않고, 리스료와 유류비, 소모품 교체 비용 등 차량 유지에 들어간 모든 금액을 100% 전액 경비처리할 수 있습니다. 또한 이용자리스 상품을 선택하면 차량 구매가에 포함된 부가가치세 환급도 동시에 가능합니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #1E293B; /* 차분하고 고급스러운 슬레이트 네이비 */
+            --secondary-color: #B45309; /* 클래식하고 강인한 느낌의 웜 오커 골드 */
+            --accent-color: #0F766E; /* 정보의 신뢰감을 더하는 무트 딥 테일 */
+            --text-color: #0F172A; /* 가독성이 극대화된 차콜 블랙 */
+            --bg-light: #FDFBF7; /* 눈의 피로를 덜어주는 부드러운 웜 크림 */
+            --bg-dark: #111827; /* 중후한 느낌의 아주 어두운 그레이 */
+            --bg-white: #FFFFFF;
+            --border-light: #E2E8F0;
+            --box-shadow: 0 10px 30px rgba(30, 41, 59, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            line-height: 1.9;
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background-color: var(--bg-white);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+            color: var(--primary-color);
+            font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+
+        header h1 a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0F172A 100%);
+            color: var(--bg-light);
+            padding: 80px 0 140px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            font-weight: 900;
+            line-height: 1.3;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.15em;
+            margin-bottom: 0;
+            font-weight: 300;
+            color: #94A3B8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 견적 계산기 폼 컨테이너 */
+        .calculator-wrapper {
+            margin-top: -80px;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .calculator-box {
+            background-color: var(--bg-white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-light);
+        }
+
+        .calculator-box h3 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.7em;
+            font-weight: 700;
+        }
+
+        .calculator-box p {
+            text-align: center;
+            color: #64748B;
+            font-size: 0.95em;
+            margin-bottom: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary-color);
+            font-size: 0.9em;
+        }
+
+        .form-group select, .form-group input {
+            padding: 12px 16px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            background-color: #F8FAFC;
+            font-size: 0.95em;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .form-group select:focus, .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            background-color: var(--bg-white);
+            box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.1);
+        }
+
+        /* 실시간 계산 결과 영역 */
+        .calc-result-area {
+            background-color: #F8FAFC;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 25px;
+            border: 1px dashed var(--border-light);
+            text-align: center;
+        }
+
+        .calc-result-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .calc-result-price {
+            font-size: 2.2em;
+            font-weight: 900;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        .calc-result-desc {
+            font-size: 0.85em;
+            color: #64748B;
+        }
+
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: var(--bg-white);
+            padding: 16px;
+            font-size: 1.15em;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .submit-btn:hover {
+            background-color: #92400E;
+            transform: translateY(-1px);
+        }
+
+        /* 콘텐츠 스타일링 */
+        .content-section {
+            background-color: var(--bg-white);
+            padding: 60px 50px;
+            border-radius: 16px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-light);
+            margin-bottom: 40px;
+        }
+
+        .content-section h2 {
+            font-size: 2.1em;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: 900;
+            border-left: 6px solid var(--secondary-color);
+            padding-left: 15px;
+            line-height: 1.3;
+        }
+
+        .content-section h3 {
+            font-size: 1.5em;
+            color: var(--primary-color);
+            margin-top: 45px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            border-bottom: 2px solid #F1F5F9;
+            padding-bottom: 10px;
+        }
+
+        .content-section h4 {
+            font-size: 1.2em;
+            color: var(--accent-color);
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .content-section p {
+            margin-bottom: 20px;
+            color: #334155;
+            text-align: justify;
+        }
+
+        /* 통계 및 시각화 테이블 */
+        .table-container {
+            margin: 35px 0;
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95em;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--bg-light);
+            padding: 16px 20px;
+            font-weight: 700;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-light);
+            color: #334155;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F8FAFC;
+        }
+
+        .highlight-text {
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        /* FAQ 스타일링 */
+        .faq-container {
+            margin-top: 40px;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            background-color: var(--bg-white);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item h4 {
+            margin: 0;
+            padding: 20px 24px;
+            font-size: 1.05em;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            background-color: #F8FAFC;
+        }
+
+        .faq-item h4::after {
+            content: '▼';
+            font-size: 0.8em;
+            color: #94A3B8;
+            transition: var(--transition);
+        }
+
+        .faq-item.active h4::after {
+            transform: rotate(180deg);
+            color: var(--secondary-color);
+        }
+
+        .faq-item p {
+            margin: 0;
+            padding: 24px;
+            display: none;
+            background-color: var(--bg-white);
+            border-top: 1px solid var(--border-light);
+            color: #475569;
+            line-height: 1.8;
+        }
+
+        /* 외부 참조 링크 */
+        .reference-box {
+            background-color: #F1F5F9;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 50px;
+            border: 1px solid var(--border-light);
+        }
+
+        .reference-box h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.3em;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .reference-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .reference-list li a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95em;
+            transition: var(--transition);
+            display: block;
+            padding: 10px;
+            background-color: var(--bg-white);
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .reference-list li a:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-white);
+            border-color: var(--accent-color);
+        }
+
+        footer {
+            background-color: var(--bg-dark);
+            color: #94A3B8;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9em;
+            border-top: 1px solid #1E293B;
+        }
+
+        /* 미디어 쿼리 */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0 120px;
+            }
+
+            .hero h2 {
+                font-size: 2em;
+            }
+
+            .calculator-box {
+                padding: 24px;
+            }
+
+            .content-section {
+                padding: 30px 20px;
+            }
+
+            .content-section h2 {
+                font-size: 1.6em;
+            }
+
+            .content-section h3 {
+                font-size: 1.25em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1><a href="/">GMC 시에라 리스 전문 비교 센터</a></h1>
+        </div>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section class="hero">
+            <div class="container">
+                <h2>초대형 픽업트럭의 기준<br>GMC 시에라 유지비 & 자동차리스 정밀 분석</h2>
+                <p>풀사이즈 픽업트럭 시에라 드날리 가솔린부터 친환경 EV 전기 모델까지, 리스료 한도와 절세 효과의 극대화를 위한 법인 및 개인사업자 맞춤 금융 설루션.</p>
+            </div>
+        </section>
+
+        <section class="container calculator-wrapper">
+            <div class="calculator-box">
+                <h3>GMC 시에라 드날리 실시간 맞춤 리스 견적기</h3>
+                <p>이용 목적과 조건에 맞춰 실시간으로 예상 월 리스 비용 및 세액 감면 혜택을 확인하실 수 있습니다.</p>
+                <form id="leaseForm" onsubmit="return false;">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="carModel">차량 세부 모델 설정</label>
+                            <select id="carModel" onchange="calculateLease()">
+                                <option value="93700000">GMC 시에라 드날리 6.2L 가솔린 (9,370만 원)</option>
+                                <option value="95000000">GMC 시에라 드날리-X 스페셜 (9,500만 원)</option>
+                                <option value="125000000">GMC 시에라 EV 디오 (1억 2,500만 원 / 예상)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="leasePeriod">이용 계약 기간</label>
+                            <select id="leasePeriod" onchange="calculateLease()">
+                                <option value="36">36개월</option>
+                                <option value="48">48개월</option>
+                                <option value="60" selected>60개월 (가장 선호)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="prepayment">인수 보증금 / 선납금 비율</label>
+                            <select id="prepayment" onchange="calculateLease()">
+                                <option value="0">무보증 (0%)</option>
+                                <option value="10">10%</option>
+                                <option value="20">20%</option>
+                                <option value="30" selected>30% (승인율 우수)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="annualMileage">연간 약정 주행거리</label>
+                            <select id="annualMileage" onchange="calculateLease()">
+                                <option value="10000">10,000 km 이하</option>
+                                <option value="20000" selected>20,000 km (표준)</option>
+                                <option value="30000">30,000 km 이상</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bizType">계약자 사업자 구분</label>
+                            <select id="bizType" onchange="calculateLease()">
+                                <option value="individual">개인 소비자</option>
+                                <option value="sole">개인 사업자 (종소세 감면)</option>
+                                <option value="corp">법인 사업자 (법인세 감면)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="driverAge">운전자 연령 제한 설정</label>
+                            <select id="driverAge">
+                                <option value="21">만 21세 이상</option>
+                                <option value="26" selected>만 26세 이상 (보험료 할인)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="calc-result-area">
+                        <div class="calc-result-title">GMC 시에라 예상 월 리스 금액</div>
+                        <div class="calc-result-price" id="monthlyLeaseValue">987,000 원</div>
+                        <div class="calc-result-desc" id="taxBenefitValue">매월 약 216,000원 상당의 종합소득세 및 법인세 환급 혜택 예상</div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" onclick="requestConsultation()">상세 견적 분석서 및 사은품 혜택 신청하기</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="content-section">
+                <h2>GMC 시에라, 화물차 혜택과 유지비에 대한 절대적인 진실</h2>
+                <p>국내 수입차 시장에서 아메리칸 헤리티지를 담은 초대형 픽업트럭의 인기가 날로 증가하고 있습니다. 그중에서도 쉐보레 실버라도, 포드 F150, 지프 글래디에이터 등 쟁쟁한 경쟁 모델들 사이에서 압도적인 존재감을 과시하는 차량이 바로 GMC 시에라 드날리입니다. 하지만 무턱대고 6,200cc에 달하는 거대한 배기량의 엔진을 품은 차량을 일시불이나 일반 할부로 구매하기에는 매월 청구될 유지비와 세금 부담이 만만치 않습니다.</p>
+                <p>많은 고객들께서 시에라의 연간 세금 혜택에 반해 관심을 갖지만, 실제 도로 위에서 뿜어내는 가솔린 연료 소비 효율과 대형 차량 전용 수입차 보험 정책은 면밀하게 계산해 보아야 합니다. 2026년 기준 신형 가솔린 사양과 전기 픽업 모델인 시에라 EV 모델까지 망라하여 현실적인 연간 총비용을 종합 분석해 드립니다.</p>
+
+                <h3>1. GMC 시에라 장기렌트카가 법적으로 아예 불가능한 이유</h3>
+                <p>수많은 소비자들이 네이버 지식인이나 디시 자동차 갤러리 등에서 GMC 시에라 장기렌트카 저렴한곳이나 싼곳을 추천해 달라는 질문을 올리곤 합니다. 결론부터 명확히 말씀드리자면, GMC 시에라는 한국 법상 장기렌트카 상품 가입 및 신규 출고 자체가 100% 불가능합니다.</p>
+                <p>우리나라 여객자동차 운수사업법상 렌터카 사업용 번호판(하, 허, 호)을 부착할 수 있는 차종은 승용자동차 및 승합자동차(15인승 이하)로 엄격히 제한되어 있습니다. GMC 시에라는 물론 쉐보레 콜로라도, 포드 레인저 랩터, 지프 글래디에이터 루비콘, 그리고 국산 차종인 렉스턴 스포츠 칸 등은 적재함을 갖춘 화물차량으로 분류됩니다. 법적으로 화물자동차는 렌터카 업체를 통한 대여업 등록이 원천 차단되어 있기 때문에, 사업자가 세무상 비용처리를 원할 때 이용할 수 있는 유일한 대안은 장기렌트카가 아닌 자동차리스 방식뿐입니다.</p>
+
+                <h3>2. 시에라 드날리 6.2L V8 가솔린 유지비 정밀 모의 계산</h3>
+                <p>초대형 픽업트럭을 구입할 때 가장 중요한 변수는 매년 빠져나가는 기름값과 유지 부품 비용입니다. 6.2리터 가솔린 자연흡기 엔진은 부드러운 회전 질감과 가속력을 선사하는 단점이 없는 훌륭한 엔진이지만, 정체 구간이 많은 도심 연비는 리터당 5km 수준에 불과합니다. 아래 표는 1년 15,000km 주행을 가정한 가솔린과 전기 사양의 유지비 차이점과 세금 구조를 시각화한 데이터입니다.</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>유지 비용 항목</th>
+                                <th>시에라 드날리 6.2L 가솔린</th>
+                                <th>시에라 EV (전기형 예상)</th>
+                                <th>쉐보레 타호 6.2L (승용 비교군)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>공식 차량 판매 가격</td>
+                                <td>9,370만 원 ~ 9,500만 원</td>
+                                <td>1억 2,500만 원 선 예상</td>
+                                <td>9,390만 원 ~ 9,400만 원</td>
+                            </tr>
+                            <tr>
+                                <td>연간 자동차세</td>
+                                <td class="highlight-text">28,500 원 (화물 혜택)</td>
+                                <td class="highlight-text">28,500 원 (화물 혜택)</td>
+                                <td>1,612,000 원 (일반 승용 기준)</td>
+                            </tr>
+                            <tr>
+                                <td>복합 공인 연비</td>
+                                <td>6.9 km/l (휘발유)</td>
+                                <td>3.2 km/kWh (예상)</td>
+                                <td>6.4 km/l (휘발유)</td>
+                            </tr>
+                            <tr>
+                                <td>연간 유류/충전 비용</td>
+                                <td>약 4,130,000 원 (15,000km)</td>
+                                <td>약 1,680,000 원 (급속 기준)</td>
+                                <td>약 4,450,000 원 (15,000km)</td>
+                            </tr>
+                            <tr>
+                                <td>종합 보험료 평균 범위</td>
+                                <td>약 1,500,000 원 ~ 2,500,000 원</td>
+                                <td>약 2,200,000 원 ~ 3,200,000 원</td>
+                                <td>약 900,000 원 ~ 1,400,000 원</td>
+                            </tr>
+                            <tr>
+                                <td>취등록세율 (공급가 기준)</td>
+                                <td class="highlight-text">5% (화물 특혜 적용)</td>
+                                <td class="highlight-text">5% (화물 특혜 적용)</td>
+                                <td>7% (일반 승용 기준)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>위의 표에서 확인할 수 있듯이, 승용 대형 SUV인 캐딜락 에스컬레이드 ESV나 쉐보레 타호와 비교하면 매년 부담해야 하는 세금과 초기 취등록세 부분에서 수백만 원 단위의 막대한 차이점을 보여줍니다. 화물 세제 혜택 덕분에 고정비 절감 효과는 매우 뛰어나지만, 수입 대형 차종 특성상 단독 사고 발생 시 판금 도색이나 고가 부품 교체 시 자기부담금이 크게 잡힐 수 있다는 점은 사전에 인지해 두셔야 합니다.</p>
+
+                <h3>3. 자동차리스 실행 시 반드시 알아야 할 세무적 이점과 팁</h3>
+                <p>법인사업자나 개인사업자가 세금 환급과 비용처리를 목표로 GMC 시에라 자동차리스 계약을 진행할 때는 크게 두 가지 방식 중 선택하게 됩니다. 바로 운용리스와 이용자명의 리스입니다. 이 중 시에라에 가장 추천해 드리는 금융 기법은 이용자명의 리스 상품입니다.</p>
+                <p>화물 차량인 시에라는 부가가치세법상 매입세액 공제 대상 차량에 해당합니다. 따라서 리스사의 명의가 아닌 사업자 본인의 명의로 리스를 실행하는 이용자명의 리스를 체결할 경우, 차량 가액에 포함된 10%의 부가세 환급 혜택을 전액 일시불로 돌려받을 수 있어 초기 납입 금액 부담을 획기적으로 낮출 수 있습니다. 또한, 일반 승용 리스 차량은 연간 리스료 경비처리 한도가 연간 800만 원(기타 유지비 포함 1,500만 원)으로 묶여 있지만, GMC 시에라와 같은 화물 차량은 제한 규정이 없어 월 200만 원 이상의 고액 리스 비용이 발생하더라도 아무런 제약 없이 100% 전액 소득세 신고 시 필요 경비로 인정받습니다.</p>
+
+                <h3>4. GMC 시에라 리스 승인 및 저렴한곳 선정을 위한 핵심 공략법</h3>
+                <p>시에라 드날리는 기본 가격이 9천만 원이 넘는 고가 수입 차량이기 때문에, 리스 심사 과정에서 고신용 및 소득 증빙이 중요한 필수 관문입니다. 다음의 5가지 요소를 숙지하면 심사 승인율을 높이고 월 납입 비용을 효과적으로 줄일 수 있습니다.</p>
+                <ul>
+                    <li><strong>잔존가치 비율의 유연한 조정:</strong> 계약 만기 시 차량을 인수할지 반납할지 여부에 따라 최적의 비율을 맞춤 설계하는 것이 중요합니다. 반납 예정이라면 잔존가치를 최대한 높게 설정하여 월 납입료를 가볍게 만들 수 있습니다.</li>
+                    <li><strong>선납금과 보증금 차이 확인:</strong> 월 납입금을 소멸식으로 낮추는 선납금 방식과 계약 만기 후 이자 처럼 고스란히 돌려받아 차량 인수금으로 대체할 수 있는 보증금 제도의 차이를 정확히 구별해야 나중에 손해를 보지 않습니다.</li>
+                    <li><strong>안전운전 특약 할인 연동:</strong> 리스 계약 후 다이렉트 자동차보험 가입 시, 티맵 점수 할인 등을 통해 가뜩이나 비싸게 책정되는 화물차 종합보험 요율을 낮추는 방향을 동시에 수립해야 합니다.</li>
+                    <li><strong>추가 소모품 패키지 프로모션:</strong> 리스 전문 대행 업체들이 자체적으로 실시하는 신규 가입 혜택 이벤트, 블랙박스 및 유리막 코팅 사은품, 혹은 주유 모바일 상품권 증정 등의 실질적인 추가 지원 혜택을 꼼꼼하게 대조해야 합니다.</li>
+                    <li><strong>2026 친환경 EV 보조금 동향 주시:</strong> 향후 시에라 EV 모델 도입 시에는 친환경차 보조금과 화물 세제 중복 혜택이 가능하므로 미리 선사전 예약을 걸어두는 방식이 추천됩니다.</li>
+                </ul>
+
+                <h3>5. 경쟁 모델 및 대체 차량 리스 시뮬레이션 비교</h3>
+                <p>GMC 시에라 드날리 외에도 국내 시장에서 리스 상품으로 활발히 출고되는 아메리칸 풀사이즈 픽업트럭들과의 특성을 비교하여 후회 없는 결정을 내리셔야 합니다.</p>
+                <h4>포드 F150 및 램 1500</h4>
+                <p>이들은 정식 수입이 아닌 병행수입 업체를 통해 들어오기 때문에 리스 진행 시 금리가 상대적으로 높게 산정되거나 전국 공식 서비스망 이용에 제약이 생겨 장기적인 부품 수리 유지비 면에서 단점이 뚜렷합니다. 반면 GMC 시에라는 한국GM의 정식 네트워크를 타기 때문에 압도적으로 편리한 수리 접근성을 제공하는 장점이 돋보입니다.</p>
+                <h4>쉐보레 콜로라도 및 포드 레인저</h4>
+                <p>이 차종들은 미드사이즈급으로 차량 가격이 4,000~6,000만 원대 사이에 포진하여 월 리스료에 대한 금전적 진입 장벽이 낮습니다. 그러나 패밀리카로 활용하기 위한 2열 뒷좌석의 넓이와 실내 프리미엄 가죽 소재의 드날리급 고급감을 기대하기는 역부족입니다.</p>
+                
+                <h3>6. 제미나이와 챗지피티가 바라보는 2026 수입 픽업트럭 전망</h3>
+                <p>최근 구글 제미나이(Gemini) 및 오픈AI 챗지피티(ChatGPT)와 같은 최신 지능형 AI 플랫폼에서 공유되는 국내 자동차 시장 리포트에 따르면, 화물 세제 혜택 유지를 바탕으로 레저 라이프스타일이 결합된 하이엔드 픽업 모델의 인기는 꾸낙히 우상향할 것으로 보고되고 있습니다. 특히 유튜브, 페이스북, 인스타그램 등 SNS 플랫폼을 통한 고가 럭셔리 마케팅이 주효하게 작용하고 있습니다.</p>
+                <p>하지만 화물 차량에 대한 보험 요율 산정 체계 개편, 혹은 대형 내연기관 차량에 대한 환경 규제 부담 등의 대외 변수도 함께 고려되어야 합니다. 결국 현명한 소비자라면 내돈내산 출고기나 온라인 커뮤니티의 단순 후기글만 맹신하기보다, 신뢰할 수 있는 기관 자료와 비교 분석 데이터를 제공하는 전문 리스 업체를 파트너로 선택하는 편이 현명한 해답입니다.</p>
+            </div>
+
+            <div class="content-section" style="background-color: #FAFAFA;">
+                <h2>자주 묻는 질문 (FAQ)</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <h4>GMC 시에라 드날리의 연간 자동차세가 28,500원인 특별한 법적 근거는 무엇인가요?</h4>
+                        <p>지방세법 규정상 적재 용량이 일정 수준 이상 확보되고 격벽이 설치된 화물 전용 차량의 경우 배기량과 무관하게 화물 자동차세 세액 등급이 적용됩니다. 시에라 드날리는 6,162cc 초고배기량 가솔린 엔진을 장착했음에도 화물칸의 구조적 형태 덕분에 연간 28,500원이라는 아주 저렴한 고정 자동차세를 일률적으로 부과받게 됩니다.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>개인사업자가 시에라 리스 시 부가세 환급(이용자리스)을 받으면 어떤 서류 절차가 필요한가요?</h4>
+                        <p>사업자등록증 사본, 소득금액증명원, 세금계산서 발행 내역 등이 필요합니다. 차량 인도 후 국세청 홈택스 시스템에 차량 이용자명의 등록 사실을 입력하고, 분기 또는 반기 부가세 자진신고 기간에 리스사로부터 발급받은 차량 부가세 매입 세무 자료를 첨부하여 전액 조기 환급 및 세액 공제를 즉시 청구할 수 있습니다.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>GMC 시에라 리스 승계는 일반 승용차 리스에 비해 처분이 쉬운 편인가요?</h4>
+                        <p>GMC 시에라는 마니아층이 두터운 독점적 대형 차종이기 때문에 승계 수요 자체는 꾸준히 발생하는 편입니다. 단, 화물차 전용 리스 계약 특성상 승계를 받는 다음 계약자 역시 사업자 요건이나 화물 전용 신용 등급 심사 승인을 매끄럽게 통과해야 승계 처리가 정상적으로 완결되므로 사전 설계 전문가의 조력이 권장됩니다.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>법인 차량 임직원 전용 전용보험 의무 가입 규정이 시에라 리스에도 동일 적용되나요?</h4>
+                        <p>법인세법상 임직원 전용 가입 규정은 승용 목적 차량에 한정되어 있습니다. 화물차로 등재되어 세무 혜택을 전액 수령하는 GMC 시에라는 업무용 승용차 법인보험 가입 제한 법규에서 완벽하게 예외 처리되므로 일반 누구나 운전 가능한 종합보험 설계를 자유롭게 채택하셔도 법적 불이익이 발생하지 않습니다.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>GMC 시에라 EV 전기 픽업 모델의 정식 출시 시 유지비 차이는 얼마나 벌어질까요?</h4>
+                        <p>2026년 이후 국내 도입이 유력한 GMC 시에라 EV 사양의 경우, 기존 가솔린 모델 대비 약 60% 이상의 고전적 유류 비용을 순수 전력 충전비만으로 대체 가능할 것으로 예측됩니다. 비록 초기 차량 출고 가격은 가솔린 사양보다 높게 수립될 예정이지만, 장기 운영 기간 총유지비 면에서는 비교 불가의 막강한 경제적 장점을 제공합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reference-box">
+                <h3>공인된 수입차 및 법률 신뢰 자원 정보처</h3>
+                <ul class="reference-list">
+                    <li><a href="https://namu.wiki/w/GMC%20%EC%8B%9C%EC%97%90%EB%9D%BC" target="_blank" rel="noopener">GMC 시에라 나무위키</a></li>
+                    <li><a href="https://www.nts.go.kr/" target="_blank" rel="noopener">국세청 공식 누리집</a></li>
+                    <li><a href="https://www.fss.or.kr/" target="_blank" rel="noopener">금융감독원 통합 공시</a></li>
+                    <li><a href="https://www.car365.go.kr/" target="_blank" rel="noopener">국토교통부 자동차365</a></li>
+                    <li><a href="https://www.kidi.or.kr/" target="_blank" rel="noopener">보험개발원 종합 공시</a></li>
+                </ul>
+            </div>
+        </section>
     </main>
-  </body>
-</html>
+
+    <script>
+        // 리스 비용 연산 함수
+        function calculateLease() {
+            const carPrice = parseInt(document.getElementById('carModel').value);
+            const period = parseInt(document.getElementById('leasePeriod').value);
+            const prepayPercent = parseInt(document.getElementById('prepayment').value);
+            const bizType = document.getElementById('bizType').value;
+
+            // 기본 가상 이자 산식
+            const interestRate = 0.052; 
+            const prepayAmount = carPrice * (prepayPercent / 100);
+            const principal = carPrice - prepayAmount;
+            
+            // 단순 선형 월납액 수식 모형
+            let monthlyLease = (principal / period) * (1 + (interestRate * (period / 12)));
+            
+            // 약정 기간별 보정
+            if(period === 36) {
+                monthlyLease *= 1.05;
+            } else if(period === 60) {
+                monthlyLease *= 0.95;
+            }
+
+            const formattedLease = Math.round(monthlyLease).toLocaleString() + " 원";
+            document.getElementById('monthlyLeaseValue').textContent = formattedLease;
+
+            // 소득세 감면 시뮬레이션 문구 반영
+            let benefitDesc = "";
+            if (bizType === "corp") {
+                benefitDesc = "법인세 한도 없는 전액 손비 처리를 통해 연간 최대 약 450만 원 상당의 법인세 절감 가능";
+            } else if (bizType === "sole") {
+                benefitDesc = "개인 종합소득세 필요경비 100% 한도 초과 인정으로 최고 소득세율 구간 기준 최대 환급 절세 효과 기대";
+            } else {
+                benefitDesc = "이용자명의 리스 적용 시 개인이더라도 화물차 특유의 취등록세 감면 및 취득 가액 절약 혜택 가능";
+            }
+            document.getElementById('taxBenefitValue').textContent = benefitDesc;
+        }
+
+        // 상담 신청 경고창 함수
+        function requestConsultation() {
+            alert("GMC 시에라 맞춤형 금융 분석서가 정상 접수되었습니다. 담당 리스 파이낸셜 설계사가 2026 최신 할인율을 적용하여 빠른 시일 내에 개별 연락드리겠습니다.");
+        }
+
+        // FAQ 아코디언 인터랙션 스크립트
+        document.querySelectorAll('.faq-item h4').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                const answer = parent.querySelector('p');
+                
+                if (parent.classList.contains('active')) {
+                    parent.classList.remove('active');
+                    answer.style.display = 'none';
+                } else {
+                    document.querySelectorAll('.faq-item').forEach(child => {
+                        child.classList.remove('active');
+                        child.querySelector('p').style.display = 'none';
+                    });
+                    parent.classList.add('active');
+                    answer.style.display = 'block';
+                }
+            });
+        });
+
+        // 초기 연산 실행
+        window.onload = function() {
+            calculateLease();
+        };
+    </script>
+
+  
